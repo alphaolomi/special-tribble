@@ -1,8 +1,7 @@
 name: Publish Release
-
 on:
-  push:
-    branches: [ prod ]
+  release:
+    types: [created]
 
 jobs:
   deploy-windows:
