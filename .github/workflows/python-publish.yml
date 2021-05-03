@@ -1,8 +1,9 @@
 name: Publish Release
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - prod
 
 jobs:
   deploy-windows:
@@ -20,3 +21,4 @@ jobs:
     - name: build with pyinstaller
       run: |
         pyinstaller app.py
+        
