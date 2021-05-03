@@ -2,8 +2,7 @@ name: Publish Release
 
 on:
   push:
-    branches:
-      - prod
+    branches: [ prod ]
 
 jobs:
   deploy-windows:
@@ -17,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel twine
+        pip install pyinstaller
     - name: build with pyinstaller
       run: |
         pyinstaller app.py
