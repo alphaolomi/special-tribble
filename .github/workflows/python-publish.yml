@@ -33,12 +33,13 @@ jobs:
         pip install pyinstaller
     - name: build with pyinstaller
       run: |
-        pyinstaller app.py
+        pyinstaller app.py -F -n app-${{ matrix.os-version }}
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |        
-          build\app\app.exe
+          build\app\app-${{ matrix.os-version }}
+          build\app\app-${{ matrix.os-version }}.exe
           draft: true
           prerelease: true
       env:
