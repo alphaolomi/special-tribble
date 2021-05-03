@@ -19,13 +19,10 @@ jobs:
         architecture: x64
     - name: Cache pip
       uses: actions/cache@v2
-      with:
-        # This path is specific to Ubuntu
-        path: ~/.cache/pip
-        # Look to see if there is a cache hit for the corresponding requirements file
-        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+      with:        
+        path: ~/.cache/pip        
+        key: ${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+        restore-keys: |      
           ${{ runner.os }}-
     - name: Install dependencies
       run: |
@@ -38,9 +35,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |        
-          build\app\app-${{ matrix.os }}
-          build\app\app-${{ matrix.os }}.exe
-          draft: true
-          prerelease: true
+          dist/app-${{ matrix.os }}
+          dist/app-${{ matrix.os }}.exe            
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
